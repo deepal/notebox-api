@@ -1,0 +1,109 @@
+GET /notebox HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+############################################################
+
+GET /notebox/b50e7d92-bc11-4c09-a8a7-99d09976d8f9 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+############################################################
+
+POST /notebox HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+{
+	"title": "my notebox",
+	"tags": ["vi", "bash", "shell"],
+	"description": "my notebox description"
+}
+
+############################################################
+
+PUT /notebox/691a2c21-ea78-4bfe-bc5b-ee855bb84ad4 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+{
+    "id": "691a2c21-ea78-4bfe-bc5b-ee855bb84ad4",
+	"title": "my notebox",
+	"tags": ["vi", "bash", "shell"],
+	"description": "my notebox description"
+}
+
+############################################################
+
+DELETE /notebox/ea818fef-841f-459b-953f-fe7bb54bea38 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+############################################################
+
+GET /note HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+############################################################
+
+GET /note/4ea56edd-5189-4874-a7d2-513107688f52 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+############################################################
+
+GET /notebox/4ea56edd-5189-4874-a7d2-513107688f52/note HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+############################################################
+
+POST /note HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+{
+    "id": "691a2c21-ea78-4bfe-bc5b-ee855bb84ad4",
+	"title": "my note",
+	"tags": ["vi", "bash", "shell"],
+	"noteContent": "my note content"
+}
+
+############################################################
+
+PUT /note/f216c255-e53c-4020-a4e0-8d4a6a6fe195 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+{
+    "id": "691a2c21-ea78-4bfe-bc5b-ee855bb84ad4",
+	"title": "my note",
+	"tags": ["vi", "bash", "shell"],
+	"noteContent": "my note content"
+}
+
+############################################################
+
+DELETE /note/92d30055-2d80-462d-8871-b869dc446902 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
+############################################################
+
+GET /tag HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+cache-control: no-cache
+
