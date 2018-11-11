@@ -1,5 +1,10 @@
 const User = require('../models/user');
-const { isNone, isNonEmptyObject, isPositiveNumber } = require('../../util/validation');
+const {
+    isNone,
+    isNonEmptyObject,
+    isPositiveNumber,
+    isNonEmptyString
+} = require('../../util/validation');
 const { MissingParameterError } = require('../../error');
 const logger = require('../../logger')(module);
 
@@ -30,6 +35,37 @@ exports.createUser = async (userObj = {}) => {
     const { id } = createdUser;
     logger.info(`created user (${id})!`);
     return createdUser;
+};
+
+exports.findOrCreateUser = async (userObj = {}) => {
+    const {
+        firstName,
+        lastName,
+        email,
+        googleProfile,
+        homepageUrl
+    } = userObj;
+
+    if (!isNonEmptyString(email)) {
+        throw new MissingParameterError('userObj.email', 'find_or_create_user');
+    }
+
+    const { getUser, createUser } = exports;
+
+    const user = await getUser({ email });
+
+    if (isNonEmptyObject(user)) return user;
+
+    // create user
+    logger.info(`no existing user found matching email ${email}. creating new user account`);
+    const created = await createUser({
+        firstName,
+        lastName,
+        email,
+        googleProfile,
+        homepageUrl
+    });
+    return created;
 };
 
 /**

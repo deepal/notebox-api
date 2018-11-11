@@ -13,7 +13,7 @@ const Schema = mongoose.Schema;
 
 const User = new Schema({
     id: {
-        type: ObjectId,
+        type: mongoose.Types.ObjectId,
         default: mongoose.Types.ObjectId()
     },
     firstName: {

@@ -13,7 +13,7 @@ const Schema = mongoose.Schema;
 
 const NoteBox = new Schema({
     id: {
-        type: ObjectId,
+        type: mongoose.Types.ObjectId,
         default: mongoose.Types.ObjectId()
     },
     title: {
