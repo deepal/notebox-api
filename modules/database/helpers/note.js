@@ -46,7 +46,7 @@ exports.createNote = async ({ title, noteContent, tags, authorId }) => {
  * @param {string[]} note.authorId - Note author's id
  * @returns {Promise}
  */
-exports.updateNote = async ({ id, title, noteContent, tags, authorId }) => {
+exports.updateNote = async ({ id, title, noteContent, tags, authorId } = {}) => {
     if (isNone(id)) {
         logger.error('update note requires \'id\' property to be present in the updating note');
         throw new MissingParameterError('id');
@@ -63,7 +63,7 @@ exports.updateNote = async ({ id, title, noteContent, tags, authorId }) => {
         lastModified: new Date()
     }).lean().exec();
 
-    logger.info(`created note (${id})!`);
+    logger.info(`updated note (${id})!`);
     return updatedNote;
 };
 
@@ -111,5 +111,6 @@ exports.deleteNote = async (filter) => {
         throw new MissingParameterError('filter');
     }
 
-    return Note.findOneAndDelete(filter);
+    await Note.findOneAndDelete(filter).exec();
+    logger.info(`deleted note matching filter: ${JSON.stringify(filter)}`);
 };
