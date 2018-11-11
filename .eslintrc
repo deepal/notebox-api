@@ -1,0 +1,14 @@
+{
+    "extends": "airbnb",
+    "globals": {
+        "RegExp": true,
+        "ObjectId": true,
+        "Object": true
+    },
+    "rules": {
+        "indent": [2, 4, {"SwitchCase": 1}],
+        "comma-dangle": "off",
+        "object-curly-newline": "off",
+        "no-underscore-dangle": "off"
+    }
+}
