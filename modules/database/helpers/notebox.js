@@ -1,6 +1,5 @@
 const NoteBox = require('../models/notebox');
 const { isNone, isNonEmptyObject, isPositiveNumber } = require('../../util/validation');
-const { stringToObjectId } = require('../../util/convert');
 const { MissingParameterError } = require('../../error');
 const logger = require('../../logger')(module);
 
@@ -48,14 +47,10 @@ exports.createNoteBox = async ({ title, description, tags, authorId } = {}) => {
  */
 exports.updateNoteBox = async ({ id, title, description, tags, authorId }) => {
     if (isNone(id)) {
-        logger.error('update notebox requires \'id\' property to be present in the updating notebox');
-        throw new MissingParameterError('id');
+        throw new MissingParameterError('id', 'update_notebox');
     }
 
-    const updatedNoteBox = await NoteBox.findOneAndUpdate({
-        id: stringToObjectId(id),
-        authorId: stringToObjectId(authorId)
-    }, {
+    const updatedNoteBox = await NoteBox.findOneAndUpdate({ id, authorId }, {
         title,
         description,
         tags,
@@ -74,8 +69,7 @@ exports.updateNoteBox = async ({ id, title, description, tags, authorId }) => {
  */
 exports.getNoteBox = async (filter) => {
     if (isNone(filter)) {
-        logger.error('missing required parameter \'filter\' to get notebox');
-        throw new MissingParameterError('filter');
+        throw new MissingParameterError('filter', 'get_notebox');
     }
 
     return NoteBox.findOne(filter).lean().exec();
@@ -107,8 +101,7 @@ exports.listNoteBoxes = async ({ filter, limit, sort, lean = true } = {}) => {
  */
 exports.deleteNoteBox = async (filter) => {
     if (isNone(filter)) {
-        logger.error('missing required parameter \'filter\' to delete note');
-        throw new MissingParameterError('filter');
+        throw new MissingParameterError('filter', 'delete_notebox');
     }
 
     await NoteBox.findOneAndDelete(filter).exec();

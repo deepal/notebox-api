@@ -1,6 +1,5 @@
 const Note = require('../models/note');
 const { isNone, isNonEmptyObject, isPositiveNumber } = require('../../util/validation');
-const { stringToObjectId } = require('../../util/convert');
 const { MissingParameterError } = require('../../error');
 const logger = require('../../logger')(module);
 
@@ -48,14 +47,10 @@ exports.createNote = async ({ title, noteContent, tags, authorId }) => {
  */
 exports.updateNote = async ({ id, title, noteContent, tags, authorId } = {}) => {
     if (isNone(id)) {
-        logger.error('update note requires \'id\' property to be present in the updating note');
-        throw new MissingParameterError('id');
+        throw new MissingParameterError('id', 'update_note');
     }
 
-    const updatedNote = await Note.findOneAndUpdate({
-        id: stringToObjectId(id),
-        authorId: stringToObjectId(authorId)
-    }, {
+    const updatedNote = await Note.findOneAndUpdate({ id, authorId }, {
         title,
         noteContent,
         tags,
@@ -74,8 +69,7 @@ exports.updateNote = async ({ id, title, noteContent, tags, authorId } = {}) => 
  */
 exports.getNote = async (filter) => {
     if (isNone(filter)) {
-        logger.error('missing required parameter \'filter\' to get note');
-        throw new MissingParameterError('filter');
+        throw new MissingParameterError('filter', 'get_note');
     }
 
     return Note.findOne(filter).lean().exec();
@@ -107,8 +101,7 @@ exports.listNotes = async ({ filter, limit, sort, lean = true } = {}) => {
  */
 exports.deleteNote = async (filter) => {
     if (isNone(filter)) {
-        logger.error('missing required parameter \'filter\' to delete note');
-        throw new MissingParameterError('filter');
+        throw new MissingParameterError('filter', 'delete_note');
     }
 
     await Note.findOneAndDelete(filter).exec();

@@ -11,7 +11,13 @@ const logger = require('../../logger')(module);
  * @returns {Promise}
  */
 exports.createTag = async ({ name, authorId } = {}) => {
-    const tag = new Tag({ name, authorId });
+    const now = new Date();
+    const tag = new Tag({
+        name,
+        authorId,
+        created: now,
+        lastModified: now
+    });
     const { id, created } = await tag.save();
     logger.info(`created tag (${id})`);
     return { id, name, authorId, created };
@@ -24,8 +30,7 @@ exports.createTag = async ({ name, authorId } = {}) => {
  */
 exports.listTags = async (filter) => {
     if (isNone(filter)) {
-        logger.error('missing required parameter \'filter\' to get tags');
-        throw new MissingParameterError('filter');
+        throw new MissingParameterError('filter', 'list_tags');
     }
 
     return Tag.find(filter).lean().exec();
@@ -51,8 +56,7 @@ exports.getTag = async (filter) => {
  */
 exports.deleteTag = async (filter) => {
     if (isNone(filter)) {
-        logger.error('missing required parameter \'filter\' to delete tag');
-        throw new MissingParameterError('filter');
+        throw new MissingParameterError('filter', 'delete_tag');
     }
 
     return Tag.findOneAndDelete(filter).exec();
