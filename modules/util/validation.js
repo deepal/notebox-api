@@ -47,12 +47,18 @@ exports.isRegexMatch = (str, regex) => {
 
 /**
  * Validate whether the given array is a string array
- * @param {*} - Target array
+ * @param {*} arr - Target array
  */
 exports.isStringOnlyArray = (arr) => {
     if (!Array.isArray(arr)) return false;
     return arr.every(el => typeof el === 'string');
 };
+
+/**
+ * Validate whether the given argument is an empty array
+ * @param {*} arr - Target array
+ */
+exports.isEmptyArray = arr => (Array.isArray(arr) && arr.length === 0);
 
 /**
  * Validate whether the given parameter is a positive number

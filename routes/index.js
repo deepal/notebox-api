@@ -1,9 +1,9 @@
 const express = require('express');
-const auth = require('./auth');
-const note = require('./note');
-const notebox = require('./notebox');
-const tag = require('./tag');
-const user = require('./user');
+const auth = require('./rest/auth');
+const note = require('./rest/note');
+const notebox = require('./rest/notebox');
+const tag = require('./rest/tag');
+const user = require('./rest/user');
 
 const router = express.Router();
 

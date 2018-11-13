@@ -21,7 +21,8 @@
     "mongoose": "5.3.10",
     "passport": "0.4.0",
     "passport-google-auth": "1.0.2",
-    "passport-google-oauth": "1.0.0"
+    "passport-google-oauth": "1.0.0",
+    "tiny-message": "2.0.0"
   },
   "devDependencies": {
     "eslint": "5.8.0",

@@ -36,7 +36,7 @@ const Note = new Schema({
         default: []
     },
     authorId: {
-        type: ObjectId,
+        type: mongoose.Types.ObjectId,
         validate: {
             validator: authorId => !isNone(authorId),
             message: () => 'authorId is required'
