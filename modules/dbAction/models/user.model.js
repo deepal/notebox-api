@@ -1,6 +1,5 @@
 /* eslint prefer-destructuring:off */
 const mongoose = require('mongoose');
-require('../connection');
 
 const {
     isNonEmptyString,

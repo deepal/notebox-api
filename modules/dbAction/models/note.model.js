@@ -1,6 +1,5 @@
 /* eslint prefer-destructuring:off */
 const mongoose = require('mongoose');
-require('../connection');
 
 const {
     isNonEmptyString,
@@ -11,7 +10,7 @@ const {
 
 const Schema = mongoose.Schema;
 
-const NoteBox = new Schema({
+const Note = new Schema({
     id: {
         type: mongoose.Types.ObjectId,
         default: mongoose.Types.ObjectId()
@@ -23,7 +22,7 @@ const NoteBox = new Schema({
             message: props => `${props.value} is not a valid title. should be a non-empty string`
         }
     },
-    description: {
+    noteContent: {
         type: String,
         default: ''
     },
@@ -36,7 +35,7 @@ const NoteBox = new Schema({
         default: []
     },
     authorId: {
-        type: ObjectId,
+        type: mongoose.Types.ObjectId,
         validate: {
             validator: authorId => !isNone(authorId),
             message: () => 'authorId is required'
@@ -46,16 +45,16 @@ const NoteBox = new Schema({
         type: Date,
         validate: {
             validator: created => isValidDate(created),
-            message: () => 'created date should be a valid date'
+            message: () => 'created date should be a valid date',
         }
     },
     lastModified: {
         type: Date,
         validate: {
             validator: lastModified => isValidDate(lastModified),
-            message: () => 'lastModified date should be a valid date'
+            message: () => 'lastModified date should be a valid date',
         }
     }
 });
 
-module.exports = mongoose.model('NoteBox', NoteBox);
+module.exports = mongoose.model('Note', Note);

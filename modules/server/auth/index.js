@@ -1,6 +1,6 @@
 const passport = require('passport');
 const googleAuth = require('./google.auth');
-const userHelper = require('../database/helpers/user.helper');
+const userHelper = require('../../database/helpers/user.helper');
 
 exports.initializeAuthModule = () => {
     googleAuth();
